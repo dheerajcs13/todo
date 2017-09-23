@@ -1,0 +1,19 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "task tracker app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dheerajcs13/todo.git"
+  },
+  "author": "dheeraj dheerajcs13@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dheerajcs13/todo/issues"
+  },
+  "homepage": "https://github.com/dheerajcs13/todo#readme"
+}
