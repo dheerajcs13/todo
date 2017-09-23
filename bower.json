@@ -1,0 +1,20 @@
+{
+  "name": "todo",
+  "description": "task tracker app",
+  "main": "index.js",
+  "authors": [
+    "dheeraj dheerajcs13@gmail.com"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/dheerajcs13/todo",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.1.0"
+  }
+}
