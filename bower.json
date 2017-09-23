@@ -17,6 +17,7 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^2.1.0",
     "iron-elements": "PolymerElements/iron-elements#^1.0.10",
-    "paper-elements": "PolymerElements/paper-elements#^1.0.7"
+    "paper-elements": "PolymerElements/paper-elements#^1.0.7",
+    "platinum-sw": "PolymerElements/platinum-sw#^2.0.0"
   }
 }
