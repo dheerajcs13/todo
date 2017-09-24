@@ -11,30 +11,22 @@
         <link rel="import" href="bower_components/polymer/polymer.html">
         <link rel="import" href="bower_components/polymer/polymer-element.html">
         <link rel="import" href="src/todo-app.html">
+        <link rel="import" href="bower_components/paper-input/paper-input.html">
         <link rel="icon" href="images/favicon.ico">
-        <title>TOdo</title>
+        <title>ToDo</title>
     </head> 
     <body>
-            <platinum-sw-register
-            auto-register
-            skip-waiting
-            clients-claim
-            reload-on-install
-            href="sw-import.js">
-          <platinum-sw-cache
-              default-cache-strategy="networkFirst">
-          </platinum-sw-cache>
+        <platinum-sw-register
+        auto-register
+        skip-waiting
+        clients-claim
+        reload-on-install
+        href="sw-import.js">
+            <platinum-sw-cache
+                 default-cache-strategy="networkFirst">
+            </platinum-sw-cache>
         </platinum-sw-register>
-            <todo-app></todo-app>
-
-          <!--  <paper-input label="your name here"></paper-input>
-           
-        <script>
-        // to insure wwebcomponents ready 
-        document.addEventListener('WebComponentsReady',function(){
-            var input = document.querySelector('paper-input');  
-            console.log(input.value);
-        });
-        </script>-->
+        <todo-app></todo-app>
+        <paper-input label="task"></paper-input>
     </body>
 </html>
