@@ -1,33 +1,19 @@
-
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../bower_components/app-layout/app-drawer/app-drawer.html">
-<link rel="import" href="../bower_components/app-layout/app-drawer-layout/app-drawer-layout.html">
-<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
-<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
-<link rel="import" href="../bower_components/app-route/app-location.html">
-<link rel="import" href="../bower_components/app-route/app-route.html">
-<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
-<link rel="import" href="../bower_components/iron-selector/iron-selector.html">
-<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
-<link rel="import" href="mere-icons.html">
-
-<!-- Main content -->
-<dom-module id="todo-app">
-        <template>
-<app-header-layout has-scrolling-region>
+<link rel="import" href="../bower_components/polymer/polymer.html">
+  <dom-module id="todo-app">
+    <template>
+      <style>
         
-                <app-header slot="header" condenses reveals effects="waterfall">
-                  <app-toolbar>
-                    <paper-icon-button icon="mere-icons:menu" drawer-toggle></paper-icon-button>
-                    <div main-title>My App</div>
-                  </app-toolbar>
-                </app-header>
-                </app-header-layout>
-                </template>
-                <script>
-                    Polymer({     is: "todo-app"});
-                </script>
-                </dom-module>
-           
+      </style>
+    </template>
+    <script>
+      class TodoApp extends Polymer.Element{
+        static get is(){
+          return "todo-app";
+        }
+        constructor(){
+          super();
+        }
+      }
+      customElements.define(TodoApp.is,TodoApp);
+    </script>
+  </dom-module>

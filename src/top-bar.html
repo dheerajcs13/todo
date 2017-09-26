@@ -1,25 +1,37 @@
-<script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-<script src="../bower_components/web-animations-js/web-animations.min.js"></script>
-<link rel="import" href="../bower_components/polymer/polymer-element.html">
-<link href="../bower_components/iron-icons/iron-icons.html" rel="import">
-<link href="../bower_components/iron-icon/iron-icon.html" rel="import">
-<link href="../bower_components/paper-icon-button/paper-icon-button.html" rel="import">
-<link href="../bower_components/paper-toolbar/paper-toolbar.html" rel="import">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
 
-<dom-module id="top-bar" >
-    <template>
-        <style>
+
+
+<dom-module id="top-bar">
         
-        </style>
-        <paper-toolbar>
-                <paper-icon-button slot="top" icon="menu"></paper-icon-button>
-                <span slot="top" class="title">ToDo Tasks</span>
-        </paper-toolbar>
         
-    </template>
-    <script>
-        Polymer({
-            is: "top-bar"
-            });
-    </script>
-</dom-module>
+          <template>
+        
+            <style>
+            
+              :host {
+                display: block;
+                padding: 16px;
+              }
+            
+            </style>
+           
+
+            <!-- local DOM goes here -->
+          </template>
+        
+          <script>
+          class TopBar extends Polymer.Element {
+            static get is() {
+            return "top-bar";
+            }
+            constructor() {
+              super();
+            }
+          }
+          customElements.define(TopBar.is, TopBar);
+          </script>
+        
+        </dom-module>
+        

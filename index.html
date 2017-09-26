@@ -2,9 +2,7 @@
 <html>
     <head>
         <!--// load webcomponents-lite in index.html -->
-        <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-        <script src="bower_components/web-animations-js/web-animations.min.js"></script>
-        <!--liking manifest -->
+        <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>        <!--liking manifest -->
         <link rel="manifest" href="manifest.json">
         <!-- add paper input  -->
         <link rel="import" href="bower_components/platinum-sw/platinum-sw-elements.html">
@@ -12,12 +10,7 @@
         <link rel="import" href="bower_components/polymer/polymer-element.html">
         <link rel="import" href="src/todo-app.html">
         <link rel="import" href="src/top-bar.html">        
-        <link rel="import" href="bower_components/paper-input/paper-input.html">
-        <link href="bower_components/iron-icons/iron-icons.html" rel="import">
-        <link href="bower_components/iron-icon/iron-icon.html" rel="import">
-        <link href="bower_components/paper-icon-button/paper-icon-button.html" rel="import">
-        <link href="bower_components/paper-toolbar/paper-toolbar.html" rel="import">
-        <link rel="icon" href="images/favicon.ico">
+        <link rel="icon" href="images/favicon.ico">        
         <title>ToDo</title>
     </head> 
     <body>
@@ -27,12 +20,15 @@
         clients-claim
         reload-on-install
         href="sw-import.js">
-            <platinum-sw-cache
-                 default-cache-strategy="networkFirst">
-            </platinum-sw-cache>
+        <platinum-sw-cache
+        default-cache-strategy="networkFirst">
+        </platinum-sw-cache>
         </platinum-sw-register>
         
+        <top-bar></top-bar>
         <todo-app></todo-app>
+
+     all is well
         
     </body>
 </html>
