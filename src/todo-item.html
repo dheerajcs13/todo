@@ -1,0 +1,45 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<dom-module id="todo-item" >
+    <template>
+        <style>
+        input{
+            font: inherit;
+        }
+        </style>
+        <vaadin-grid items="[[tName]]">
+            <vaadin-grid-column>
+                <template class="header">
+                    <span draggable="true">
+                          Task Name
+                    </span>
+                </template>
+                <template>
+                    <paper-checkbox checked="{{editing}}" ></paper-checkbox>
+                    <input value="{{item}}" readonly$="[[!editing]]">
+                </template>
+                <template class="footer">Task Name</template>
+            </vaadin-grid-column>
+        </vaadin-grid>
+    </template>
+    <script>
+        class TodoItem extends Polymer.Element{
+        static get is(){
+          return "todo-item";
+        }
+        static get properties(){
+          return {
+              tName:{
+                  type: String,
+                  notify: true
+              },
+              editing:{
+                type: Boolean,
+                notify: true
+              }
+          }
+        }
+        }
+        customElements.define(TodoItem.is,TodoItem );
+    </script>
+</dom-module>

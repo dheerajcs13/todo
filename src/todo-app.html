@@ -6,6 +6,9 @@
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/vaadin-valo-theme/vaadin-grid.html">
+<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
+<link rel="import" href="todo-item.html">
 
 <dom-module id="todo-app">
     <template>
@@ -16,7 +19,7 @@
         .input paper-input{
           flex: 1;
         }
-        .input paper-button{
+        .input paper-button{ 
           flex: 0 0 auto;
         }
       </style>
@@ -31,7 +34,7 @@
       <paper-input id="todo" value="{{todo}}" ></paper-input>
       <paper-button raised on-tap="addTask">Add Task</paper-button>
       </div>
-
+<!-- use of list
       <div id="tasks" class="tasks">
         <ul id="incomplete">
           <li>eat</li>
@@ -41,8 +44,13 @@
           <li>play</li>
         </ul>
       </div>
-
+    -->
         
+<!-- use of grid -->
+      
+
+    <todo-item t-name="[[todos]]"></todo-item>
+               
 
     </template>
     <script>
@@ -68,11 +76,12 @@
           super();
           var p = Polymer.dom(this).querySelector("LI");
           console.log(this);
+
         }
         
        addTask() {
           this.push('todos',this.todo);
-        var lis = document.createElement('li');
+        /*var lis = document.createElement('li');
         var to = this.todo;
         var x = Polymer.dom(this.root).querySelector("#incomplete");
         console.log(x);
@@ -85,13 +94,14 @@
           }
           else{
             x.appendChild(lis);
-          }
+          }*/
           this.todo="";
+          /*
           var span = document.createElement("SPAN");
           var txt = document.createTextNode("\u00D7");
           span.className = "close";
           Polymer.dom(span).appendChild(txt);
-          Polymer.dom(lis).appendChild(span);
+          Polymer.dom(lis).appendChild(span);*/
       } 
       }
       
