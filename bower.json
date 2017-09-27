@@ -17,6 +17,10 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^2.1.0",
     "platinum-sw": "PolymerElements/platinum-sw#^2.0.0",
-    "paper-input": "PolymerElements/paper-input#^2.0.2"
+    "paper-input": "PolymerElements/paper-input#^2.0.2",
+    "app-layout": "PolymerElements/app-layout#^2.0.1",
+    "iron-icons": "PolymerElements/iron-icons#^2.0.1",
+    "paper-fab": "PolymerElements/paper-fab#^2.0.0",
+    "paper-button": "PolymerElements/paper-button#^2.0.0"
   }
 }

@@ -1,19 +1,100 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-  <dom-module id="todo-app">
+<link rel="import" href="../bower_components/app-layout/app-layout.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<dom-module id="todo-app">
     <template>
       <style>
-        
+        .input{
+          display: flex;
+        }
+        .input paper-input{
+          flex: 1;
+        }
+        .input paper-button{
+          flex: 0 0 auto;
+        }
       </style>
+      
+
+    <app-toolbar class="toolbar">
+        <paper-icon-button icon="menu"></paper-icon-button>
+        <div main-title>Todo</div>
+        <paper-icon-button icon="search" ></paper-icon-button>
+      </app-toolbar>
+      <div class="input">
+      <paper-input id="todo" value="{{todo}}" ></paper-input>
+      <paper-button raised on-tap="addTask">Add Task</paper-button>
+      </div>
+
+      <div id="tasks" class="tasks">
+        <ul id="incomplete">
+          <li>eat</li>
+          <li>sleep</li>
+        </ul>
+        <ul id="complete">
+          <li>play</li>
+        </ul>
+      </div>
+
+        
+
     </template>
     <script>
       class TodoApp extends Polymer.Element{
         static get is(){
           return "todo-app";
         }
-        constructor(){
-          super();
+        static get properties(){
+          return {
+            todo:{
+              type:String
+            },
+            todos:{
+              type: Array,
+              value: function(){
+                return [];
+              }
+            }
+          }
         }
+        constructor(){
+          
+          super();
+          var p = Polymer.dom(this).querySelector("LI");
+          console.log(this);
+        }
+        
+       addTask() {
+          this.push('todos',this.todo);
+        var lis = document.createElement('li');
+        var to = this.todo;
+        var x = Polymer.dom(this.root).querySelector("#incomplete");
+        console.log(x);
+        console.log(this.todo);
+        console.log(this);
+        var t = document.createTextNode(to);
+        Polymer.dom(lis).appendChild(t);
+          if(this.todo == ''){
+            alert('task with no name haha');
+          }
+          else{
+            x.appendChild(lis);
+          }
+          this.todo="";
+          var span = document.createElement("SPAN");
+          var txt = document.createTextNode("\u00D7");
+          span.className = "close";
+          Polymer.dom(span).appendChild(txt);
+          Polymer.dom(lis).appendChild(span);
+      } 
       }
+      
       customElements.define(TodoApp.is,TodoApp);
     </script>
   </dom-module>
