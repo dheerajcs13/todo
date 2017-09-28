@@ -3,11 +3,11 @@
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="../bower_components/vaadin-valo-theme/vaadin-grid.html">
-<link rel="import" href="../bower_components/vaadin-grid/vaadin-grid.html">
 <link rel="import" href="todo-item.html">
 
 <dom-module id="todo-app">
@@ -31,26 +31,12 @@
         <paper-icon-button icon="search" ></paper-icon-button>
       </app-toolbar>
       <div class="input">
-      <paper-input id="todo" value="{{todo}}" ></paper-input>
+      <paper-input id="todo" value="{{todo.task}}" ></paper-input>
       <paper-button raised on-tap="addTask">Add Task</paper-button>
       </div>
-<!-- use of list
-      <div id="tasks" class="tasks">
-        <ul id="incomplete">
-          <li>eat</li>
-          <li>sleep</li>
-        </ul>
-        <ul id="complete">
-          <li>play</li>
-        </ul>
-      </div>
-    -->
-        
-<!-- use of grid -->
-      
-
-    <todo-item t-name="[[todos]]"></todo-item>
-               
+      <template id="template" is="dom-repeat" items="[[todos]]" as="todo">
+    <todo-item t-name="[[todo]]"></todo-item>
+      </template>          
 
     </template>
     <script>
@@ -61,7 +47,10 @@
         static get properties(){
           return {
             todo:{
-              type:String
+              type: Object,
+              value: function(){
+                return {};
+              }
             },
             todos:{
               type: Array,
@@ -80,30 +69,15 @@
         }
         
        addTask() {
+         if(this.todo.task == null ){
+          alert("HAha, Task with NO name");
+         }
+         else{
           this.push('todos',this.todo);
-        /*var lis = document.createElement('li');
-        var to = this.todo;
-        var x = Polymer.dom(this.root).querySelector("#incomplete");
-        console.log(x);
-        console.log(this.todo);
-        console.log(this);
-        var t = document.createTextNode(to);
-        Polymer.dom(lis).appendChild(t);
-          if(this.todo == ''){
-            alert('task with no name haha');
-          }
-          else{
-            x.appendChild(lis);
-          }*/
-          this.todo="";
-          /*
-          var span = document.createElement("SPAN");
-          var txt = document.createTextNode("\u00D7");
-          span.className = "close";
-          Polymer.dom(span).appendChild(txt);
-          Polymer.dom(lis).appendChild(span);*/
-      } 
-      }
+         }
+         this.todo={};
+      
+        
       
       customElements.define(TodoApp.is,TodoApp);
     </script>
