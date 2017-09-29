@@ -1,0 +1,159 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+
+<link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
+<link rel="import" href="../bower_components/polymerfire/firebase.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-query.html">
+
+<dom-module id="todo-task">
+
+  <template>
+      <style>
+          :host {
+            font-family: Arial, Helvetica, sans-serif;
+            font-style: normal;
+            font-weight: bold;
+          }
+          .input{
+                display: flex;
+              }
+              .input paper-input{
+                flex: 1;
+              }
+              .input paper-button{ 
+                flex: 0 0 auto;
+    
+              }
+              .done{
+                      background: rgba(180,180,0,0.5);
+                  }
+              #undone{
+                display: flex;
+                padding: 10px;
+              }
+              #done{
+                display: flex;
+                padding: 10px;
+              }
+              .input{
+                padding: 10px;
+    
+              }
+              input[readonly] {
+              border: 2px solid transparent;
+            }
+    
+        </style>
+    <firebase-auth user = "{{user}}">
+    </firebase-auth>
+    <firebase-query id="query"
+         path="/users/[[user.uid]]/todos" 
+         data="{{todos}}">
+  </firebase-query>
+    
+    <div class="input">
+        <paper-input id="inputtodo" label="add task" ></paper-input>
+        <paper-button raised on-tap="addTask">Add Task</paper-button>
+        </div>
+      <template id="template" is="dom-repeat" items="[[todos]]" as="todo">
+          <div id="undone">
+              <paper-checkbox checked="{{todo.editing}}"></paper-checkbox>
+              <input value="{{todo.task}}"  id="updatetodo" todo="[[todo]]" readonly$="[[!todo.editing]]">
+             <template id="template_t" is="dom-if" if="[[todo.editing]]">
+              <paper-icon-button icon="check" todo="[[todo]]" on-tap="update"></paper-icon-button>
+              </template> 
+              <paper-icon-button icon="assignment-turned-in" id="check" on-tap="complete"></paper-icon-button>
+              <paper-icon-button icon="delete" id="del"  todo="[[todo]]" on-tap="delete"></paper-icon-button>
+          </div>
+          <div id="done" class="done">
+            
+          </div>
+      </template>
+  </template>
+  <script>
+    class TodoTask extends Polymer.Element{
+      static get is(){
+        return "todo-task";
+      }
+      static get properties(){
+          return {
+            todo:{
+              type: Object,
+              value: function(){
+                return {};
+              }
+            }
+            
+          }
+        }
+        constructor(){
+          super();
+          
+        }
+      update(e){
+        var key = e.currentTarget.todo.$key;
+        var task = "task";
+        var updated = Polymer.dom(this.root).querySelector('#updatetodo').value;
+        
+        this.$.query.ref.child(key).child(task).set(updated);
+      
+      }
+       addTask() {
+         if(this.$.inputtodo.value == null ){
+          alert("HAha, Task with NO name");
+         }
+         else{
+          
+          this.$.query.ref.push({
+            task: this.$.inputtodo.value
+          });
+         }
+         this.$.inputtodo.value = null; 
+       }
+      complete(){
+            var u = Polymer.dom(this.root).querySelector('#undone');
+            var d = Polymer.dom(this.root).querySelector('#done');
+    
+            u.addEventListener('tap',function done_task(e){
+                if (!e){e=window.event();}
+                var el = e.target;
+               if(el.id === 'check'){
+                    while(u.hasChildNodes()){
+                        d.appendChild(u.firstChild);
+                    }
+                    
+               }
+                this.removeEventListener('tap',done_task, false);
+            },false);
+
+
+             d.addEventListener('tap',function undone_task(e){
+                if (!e){e=window.event();}
+                var el = e.target;
+               if(el.id === 'check'){
+                   while(d.hasChildNodes()){
+                       u.appendChild(d.firstChild);
+                   }
+                    
+               }
+                this.removeEventListener('tap',undone_task, false);
+            },false);
+        }
+        delete(e){
+           //var x = Polymer.dom(this.root).querySelector('#undone');
+            var key = e.currentTarget.todo.$key;
+
+           //x.parentNode.removeChild(x);
+           this.$.query.ref.child(key).remove();
+        }
+    }
+    customElements.define(TodoTask.is,TodoTask);
+  </script>
+</dom-module>

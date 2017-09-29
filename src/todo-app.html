@@ -3,39 +3,39 @@
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
-<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+<link rel="import" href="todo-task.html"> 
+<link rel="import" href="my-login.html"> 
+<link rel="import" href="../bower_components/polymerfire/firebase-auth.html">
 
-<link rel="import" href="../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../bower_components/paper-button/paper-button.html">
-<link rel="import" href="todo-item.html">
 
 <dom-module id="todo-app">
     <template>
-      <style>
-        .input{
-          display: flex;
-        }
-        .input paper-input{
-          flex: 1;
-        }
-        .input paper-button{ 
-          flex: 0 0 auto;
+      <style> 
+        .toolbar{
+          background-color: rgba(7, 5, 107, 0.5);
+          color:rgba(255, 255, 255, 0.9);
+
         }
       </style>
+      <firebase-app
+          id="todo"
+          auth-domain="task-e5b44.firebaseapp.com"
+          database-url="https://task-e5b44.firebaseio.com"
+          api-key="AIzaSyCGU44ccg-fwEWLl78_Lfbzm2QdEl44duw">
+    </firebase-app>
+    <firebase-auth id="auth" user="{{user}}" status-known="{{statusKnown}}" provider="google" on-error="handleError">
+      </firebase-auth>
+      <app-toolbar class="toolbar">
+          <paper-icon-button icon="assignment"></paper-icon-button>
+          <div main-title>Todo</div>
+          <paper-icon-button icon="help" ></paper-icon-button>
+        </app-toolbar>
+      <my-login></my-login>
+      <template is="dom-if" if = "[[user]]">
+          <todo-task></todo-task>
+      </template>
       
-
-    <app-toolbar class="toolbar">
-        <paper-icon-button icon="menu"></paper-icon-button>
-        <div main-title>Todo</div>
-        <paper-icon-button icon="search" ></paper-icon-button>
-      </app-toolbar>
-      <div class="input">
-      <paper-input id="todo" value="{{todo.task}}" ></paper-input>
-      <paper-button raised on-tap="addTask">Add Task</paper-button>
-      </div>
-      <template id="template" is="dom-repeat" items="[[todos]]" as="todo">
-    <todo-item t-name="[[todo]]"></todo-item>
       </template>          
 
     </template>
@@ -43,41 +43,7 @@
       class TodoApp extends Polymer.Element{
         static get is(){
           return "todo-app";
-        }
-        static get properties(){
-          return {
-            todo:{
-              type: Object,
-              value: function(){
-                return {};
-              }
-            },
-            todos:{
-              type: Array,
-              value: function(){
-                return [];
-              }
-            }
-          }
-        }
-        constructor(){
-          
-          super();
-          var p = Polymer.dom(this).querySelector("LI");
-          console.log(this);
-
-        }
-        
-       addTask() {
-         if(this.todo.task == null ){
-          alert("HAha, Task with NO name");
-         }
-         else{
-          this.push('todos',this.todo);
-         }
-         this.todo={};
-      
-        
+        }} 
       
       customElements.define(TodoApp.is,TodoApp);
     </script>
